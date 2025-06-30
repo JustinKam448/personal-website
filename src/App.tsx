@@ -1,30 +1,17 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import styles from './App.module.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { NotFound } from "./pages/NotFound"
 
 const App: React.FC = () => {
   return (
     <>
-      <Navbar />
-      <main className={styles.main}>
-        <section id="home">
-          <h1>Hi, welcome to my website!</h1>
-          <h2>I'm Justin Kam</h2>
-          <p>
-            A passionate developer learning React, TypeScript, and modern web technologies.
-          </p>
-        </section>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Home />} />
 
-        <section id="blog" className={styles.section}>
-          <h3>Blog</h3>
-          <p>Coming soon...</p>
-        </section>
-
-        <section id="contact" className={styles.section}>
-          <h3>Contact Me</h3>
-          <p>Email: kamjustin@gmail.com</p>
-        </section>
-      </main>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };
