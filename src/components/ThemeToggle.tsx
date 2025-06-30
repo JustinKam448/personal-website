@@ -2,15 +2,18 @@ import { useEffect, useState } from "react"
 import { Sun, Moon } from "lucide-react";
 import { cn } from "../lib/utils";
 
+type Theme = "light" | "dark";
+
+
 /**
  * Light Mode and Dark Mode Button
  */
 export const ThemeToggle = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
     // Use to remember which state the webpage was in so stays when reloaded
     useEffect(() => {
-        const storedTheme = localStorage.getItem("theme");
+        const storedTheme = localStorage.getItem("theme") as Theme | null;
         if (storedTheme === "dark") {
             setIsDarkMode(true);
             document.documentElement.classList.add("dark");
@@ -30,13 +33,12 @@ export const ThemeToggle = () => {
             localStorage.setItem("theme", "dark");
             setIsDarkMode(true);
         }
-        setIsDarkMode(!isDarkMode);
     }
 
     return (
         <button onClick={toggleTheme} className={cn(
             "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300",
-            "focus:outlin-hidden")}> 
+            "focus:outline-none")}> 
             {isDarkMode ? (
                 <Sun className="h-6 w-6 text-yellow-300"/>
             ) : (
