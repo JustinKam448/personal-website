@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/************ Custom Font ************/
+@font-face {
+	font-family: Centra;
+	src: url('./assets/font/CentraNo2-Bold.ttf') format('truetype');
+	font-weight: 700;
+}
+@font-face {
+	font-family: Centra;
+	src: url('./assets/font/CentraNo2-Medium.ttf') format('truetype');
+	font-weight: 500;
+}
+@font-face {
+	font-family: Centra;
+	src: url('./assets/font/CentraNo2-Book.ttf') format('truetype');
+	font-weight: 400;
+}
+
 /* =========================
    Base Layer - Custom Theme
    ========================= */
@@ -35,6 +52,9 @@
     --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
     --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
     --animate-meteor: meteor 5s linear infinite;
+
+    /* Navbar */
+    --navbar-bg: 0 0% 7%; /* #121212 */
   }
 
   html.dark {
@@ -56,11 +76,20 @@
 
   html {
     @apply scroll-smooth;
+    scroll-padding-top: 75px; /* custom */
   }
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
+    font-family: 'Centra', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
   }
 
   #root {
@@ -69,12 +98,119 @@
     padding: 0;
     text-align: center;
   }
+
+    p.success {
+    color: green;
+  }
+
+  p.danger {
+    color: red;
+  }
 }
 
-/* =========================
+@layer utilities {
+
+  /* =========================
+   NavBar Styling
+   ========================= */
+  .navbar-link {
+    @apply flex text-white text-[18px] font-normal px-[25px] opacity-75 hover:opacity-100 transition-opacity;
+  }
+
+  .navbar-link.active {
+    @apply opacity-100;
+  }
+
+  .navbar-text {
+    @apply flex items-center;
+  }
+
+  .navbar-scrolled {
+    @apply bg-[hsl(var(--navbar-bg))];
+  }
+
+  .social-icon {
+    @apply inline-block ml-[14px];
+  }
+
+  .social-icon-link {
+    @apply relative w-[42px] h-[42px] inline-flex items-center justify-center rounded-full bg-white/10 mr-[6px] border border-white/50 transition-all;
+  }
+
+  .social-icon-link::before {
+    content: "";
+    @apply absolute w-full h-full bg-white rounded-full scale-0 transition-transform duration-300;
+  }
+
+  .social-icon-link:hover::before {
+    @apply scale-100;
+  }
+
+  .social-icon-img {
+    @apply w-[40%] relative z-10 transition-all;
+  }
+
+  .social-icon-link:hover .social-icon-img {
+    filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%) hue-rotate(346deg) brightness(95%) contrast(86%);
+  }
+
+  .nav-button {
+    @apply font-bold text-white border border-white px-[34px] py-[18px] text-[18px] ml-[18px] bg-transparent relative transition-all duration-300;
+  }
+
+  .nav-button span {
+    @apply relative z-10;
+  }
+
+  .nav-button::before {
+    content: "";
+    @apply absolute left-0 top-0 h-full w-0 bg-white z-0 transition-all duration-300;
+  }
+
+  .nav-button:hover {
+    @apply text-[#121212];
+  }
+
+  .nav-button:hover::before {
+    content: "";
+    @apply w-full h-full absolute;
+  }
+
+  .navbar-toggler-icon {
+    @apply w-[24px] h-[17px] relative border-b-2 border-white transition-all;
+    background-image: none;
+    top: -2px;
+  }
+
+  .navbar-toggler-icon::before,
+  .navbar-toggler-icon::after {
+    content: "";
+    @apply absolute w-[24px] h-[2px] bg-white left-0;
+  }
+
+  .navbar-toggler-icon::after {
+    top: 8px;
+  }
+
+  .navbar-toggler-icon::before {
+    top: 0;
+  }
+
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: rotate(45deg);
+  }
+
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: translateY(8px) rotate(-45deg);
+  }
+
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    border-color: transparent;
+  }
+
+  /* =========================
    Keyframes
    ========================= */
-@layer utilities {
   @keyframes float {
     0%, 100% {
       transform: translateY(0);
@@ -117,12 +253,10 @@
       opacity: 0;
     }
   }
-}
 
-/* =========================
-   Utility Classes
+  /* =========================
+   Background 
    ========================= */
-@layer utilities {
   .text-glow {
     @apply relative;
     text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);

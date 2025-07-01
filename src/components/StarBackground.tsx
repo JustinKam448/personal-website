@@ -70,7 +70,7 @@ export const StarBackground = () => {
     };
 
     const generateMeteors = () => {
-        const numberofMeteors = 4; // limit the number of meteors so we don't have stuff flying everywhere
+        const numberofMeteors = 6; // limit the number of meteors so we don't have stuff flying everywhere
 
         const newMeteor : Meteor[] = [];
 
@@ -108,7 +108,7 @@ export const StarBackground = () => {
                     key={meteor.id} className="meteor animate-meteor" 
                     style={{
                         width: `${meteor.size * 50}px`,
-                        height: `${meteor.size * 3}px`,
+                        height: `${meteor.size}px`,
                         left: `${meteor.xCoord}%`,
                         top: `${meteor.yCoord}%`,
                         animationName: "meteor",

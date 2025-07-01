@@ -15,6 +15,9 @@ const config: Config = {
         "primary-foreground": "hsl(var(--primary-foreground))",
         card: "hsl(var(--card))",
       },
+      fontFamily: {
+        centra: ['Centra', 'sans-serif'], // fallback to sans-serif
+      },
     },
   },
   darkMode: "class", // very important!
