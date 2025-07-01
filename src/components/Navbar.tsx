@@ -3,7 +3,6 @@ import { HashLink } from 'react-router-hash-link';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import logo from '../assets/logo.svg';
 import githubLogo from '../assets/Github.png';
 import linkedinLogo from '../assets/linkedin.svg';
 import instagramLogo from '../assets/instagram.svg';
@@ -70,11 +69,14 @@ export const NavBar = () => {
 
   return (
     <Navbar expand="lg" className={`fixed top-0 w-full z-[9999] transition-all duration-300 ${scrolled ? 'navbar-scrolled py-0' : 'py-[18px]'}`}>
-      <Container className="flex items-center justify-between pr-[10px]">
+      <Container className="flex items-center justify-between pr-[30px] pl-[30px]">
 
         {/* Left side: Logo */}
-        <Navbar.Brand href="#home" className="flex-shrink-0">
-          <img src={logo} alt="Logo" className="w-[100%] pl-10 pr-10" />
+        <Navbar.Brand href="#home" className="text-xl font-bold text-primary items-center flex">
+          <a href="#home">
+            <span className="text-glow text-foreground">Justin </span>
+          </a>
+            Portfolio
         </Navbar.Brand>
 
         {/* Toggle Button (mobile only) */}
@@ -84,13 +86,20 @@ export const NavBar = () => {
 
         {/* Collapse Area: Nav links + Socials + Button + ThemeToggle */}
         <Navbar.Collapse id="basic-navbar-nav" className="flex justify-between items-center w-full">
-          <Nav className="flex space-x-6">
+
+          <div className="w-15" />
+
+          {/* Center Nav Links */}
+          <Nav className="flex space-x-6 justify-center">
             <Nav.Link href="#home" className={`navbar-link ${activeLink === 'home' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
             <Nav.Link href="#skills" className={`navbar-link ${activeLink === 'skills' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
             <Nav.Link href="#projects" className={`navbar-link ${activeLink === 'projects' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
           </Nav>
-          <div className="flex items-center">
-            <div className='flex space-x-2'>
+
+          {/* Right-side: Socials + Button + Toggle */}
+          <div className="flex items-center space-x-4 mt-4 lg:mt-0">
+
+            <div className='social-icon'>
 
               <a href="#" className="social-icon-link">
                 <img src={githubLogo} alt="Github" className="social-icon-img" />
@@ -107,7 +116,7 @@ export const NavBar = () => {
             </div>
 
             <HashLink to='#connect'>
-              <button className="nav-button ml-4" onClick={() => console.log('connect!')}>
+              <button className="nav-button" onClick={() => console.log('connect!')}>
                 <span>Let’s Connect</span>
               </button>
             </HashLink>
@@ -115,8 +124,8 @@ export const NavBar = () => {
             {/* Insert ThemeToggle here */}
             <ThemeToggle />
           </div>
-        </Navbar.Collapse>
 
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   )

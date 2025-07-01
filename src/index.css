@@ -114,7 +114,7 @@
    NavBar Styling
    ========================= */
   .navbar-link {
-    @apply flex text-white text-[18px] font-normal px-[25px] opacity-75 hover:opacity-100 transition-opacity;
+    @apply flex text-glow text-[18px] font-normal px-[25px] opacity-75 hover:opacity-100 transition-opacity;
   }
 
   .navbar-link.active {
