@@ -51,7 +51,7 @@ const ThemeToggle = () => {
     );
 }
 
-export const NavBar = () => {
+export const PCNavBar = () => {
   const [activeLink, setActiveLink] = useState<string>('home');
   const [scrolled, setScrolled] = useState<boolean>(false);
 
@@ -69,7 +69,7 @@ export const NavBar = () => {
 
   return (
     <Navbar expand="lg" className={`fixed top-0 w-full z-[9999] transition-all duration-300 ${scrolled ? 'navbar-scrolled py-0' : 'py-[18px]'}`}>
-      <Container className="flex items-center justify-between pr-[30px] pl-[30px]">
+      <Container className="flex items-center justify-between pr-[30px] pl-[80px]">
 
         {/* Left side: Logo */}
         <Navbar.Brand href="#home" className="text-xl font-bold text-primary items-center flex">
@@ -79,21 +79,23 @@ export const NavBar = () => {
             Portfolio
         </Navbar.Brand>
 
-        {/* Toggle Button (mobile only) */}
+        {/* Toggle Button (mobile only)
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="lg:hidden">
           <span className='navbar-toggler-icon'></span>
-        </Navbar.Toggle>
+        </Navbar.Toggle> */}
 
         {/* Collapse Area: Nav links + Socials + Button + ThemeToggle */}
         <Navbar.Collapse id="basic-navbar-nav" className="flex justify-between items-center w-full">
 
           <div className="w-15" />
 
-          {/* Center Nav Links */}
+          {/* Center Nav Links, blog will be a separate page */}
           <Nav className="flex space-x-6 justify-center">
             <Nav.Link href="#home" className={`navbar-link ${activeLink === 'home' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
+            <Nav.Link href="#about" className={`navbar-link ${activeLink === 'about' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('about')}>About</Nav.Link>
             <Nav.Link href="#skills" className={`navbar-link ${activeLink === 'skills' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
             <Nav.Link href="#projects" className={`navbar-link ${activeLink === 'projects' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
+            <Nav.Link href="#blog" className={`navbar-link ${activeLink === 'blog' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('Blog')}>Blog</Nav.Link>
           </Nav>
 
           {/* Right-side: Socials + Button + Toggle */}
@@ -115,6 +117,7 @@ export const NavBar = () => {
 
             </div>
 
+            { /* Connect page will be a separate page */ }
             <HashLink to='#connect'>
               <button className="nav-button" onClick={() => console.log('connect!')}>
                 <span>Let’s Connect</span>
