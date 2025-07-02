@@ -3,12 +3,12 @@ import { cn } from "../lib/utils";
 import { Menu, X } from "lucide-react";
 
 
-type navItem = {
+type NavItem = {
   name: string;
   href: string;
 };
 
-const navItems : navItem[] = [
+const navItems : readonly NavItem[] = [
     {name: "Home", href: "#home"},
     {name: "About", href: "#about"},
     {name: "Skills", href: "#skills"},
@@ -17,19 +17,19 @@ const navItems : navItem[] = [
     {name: "Contact", href: "#contact"}, // blog and contact will be a separate page
 ];
 
-export const MobileNavBar = () => {
+export const MobileNavBar : React.FC = () => {
 
     const [isScrolled, setIsScrolled] = useState<boolean>(false);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.screenY > 10);
+            setIsScrolled(window.scrollY > 10);
         }
 
-        window.addEventListener("mobileScroll", handleScroll);
+        window.addEventListener("scroll", handleScroll);
 
-        return () => { window.removeEventListener("mobileScroll", handleScroll); };
+        return () => { window.removeEventListener("scroll", handleScroll); };
     }, [])
 
     return (

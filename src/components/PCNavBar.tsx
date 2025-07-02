@@ -10,8 +10,9 @@ import { Sun, Moon } from "lucide-react";
 import { cn } from "../lib/utils";
 
 type Theme = "light" | "dark";
+type NavSection = "home" | "about" | "skills" | "projects" | "blog";
 
-const ThemeToggle = () => {
+const ThemeToggle : React.FC = () => {
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
     useEffect(() => {
@@ -26,15 +27,18 @@ const ThemeToggle = () => {
     }, [])
 
     const toggleTheme = () => {
-        if (isDarkMode) {
-            document.documentElement.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-            setIsDarkMode(false);
-        } else {
-            document.documentElement.classList.add("dark");
-            localStorage.setItem("theme", "dark");
-            setIsDarkMode(true);
-        }
+
+      const storedTheme = localStorage.getItem("theme") as Theme | null;
+
+      if (storedTheme === "dark") {
+          document.documentElement.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+          setIsDarkMode(false);
+      } else {
+          document.documentElement.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+          setIsDarkMode(true);
+      }
     }
 
     return (
@@ -51,8 +55,8 @@ const ThemeToggle = () => {
     );
 }
 
-export const PCNavBar = () => {
-  const [activeLink, setActiveLink] = useState<string>('home');
+export const PCNavBar : React.FC = () => {
+  const [activeLink, setActiveLink] = useState<NavSection>('home');
   const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -65,7 +69,7 @@ export const PCNavBar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, [])
 
-  const onUpdateActiveLink = (value : string) => setActiveLink(value);
+  const onUpdateActiveLink = (value : NavSection) => setActiveLink(value);
 
   return (
     <Navbar expand="lg" className={`fixed top-0 w-full z-[9999] transition-all duration-300 ${scrolled ? 'navbar-scrolled py-0' : 'py-[18px]'}`}>
@@ -95,7 +99,7 @@ export const PCNavBar = () => {
             <Nav.Link href="#about" className={`navbar-link ${activeLink === 'about' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('about')}>About</Nav.Link>
             <Nav.Link href="#skills" className={`navbar-link ${activeLink === 'skills' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
             <Nav.Link href="#projects" className={`navbar-link ${activeLink === 'projects' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
-            <Nav.Link href="#blog" className={`navbar-link ${activeLink === 'blog' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('Blog')}>Blog</Nav.Link>
+            <Nav.Link href="#blog" className={`navbar-link ${activeLink === 'blog' ? 'active' : ''}`} onClick={() => onUpdateActiveLink('blog')}>Blog</Nav.Link>
           </Nav>
 
           {/* Right-side: Socials + Button + Toggle */}
@@ -118,7 +122,7 @@ export const PCNavBar = () => {
             </div>
 
             { /* Connect page will be a separate page */ }
-            <HashLink to='#connect'>
+            <HashLink to='#contact'>
               <button className="nav-button" onClick={() => console.log('connect!')}>
                 <span>Let’s Connect</span>
               </button>
